@@ -23,8 +23,8 @@ services:
     build: .
     volumes:
       - ./rails_app:/rails_app
-    environment:
-      - RAILS_ENV=${RAILS_ENV}
+    env_file:
+      - .env
     ports:
       - 3000:3000      
     depends_on:

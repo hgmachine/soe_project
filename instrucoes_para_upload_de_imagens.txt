@@ -1,0 +1,52 @@
+To insert an image attribute using scaffold in Rails, you need to follow these steps:
+
+1. Generate a scaffold for your model:
+$ rails generate scaffold YourModelName name:string image:string
+
+2. This command generates a migration file that creates a table with 'name' and 'image' columns.
+You need to run the migration to create the table in the database:
+$ rails db:migrate
+
+3. Next, open the model file ('app/models/user.rb') and add the 'has_one_attached' directive to the model class definition:
+
+class YourModelName < ApplicationRecord
+  has_one_attached :image
+end
+
+4. In the form where you want to insert the image, use the 'file_field' helper
+method to generate the input field for selecting the image file:
+
+<%= form.file_field :image %>
+
+5. In the controller, permit the 'image' parameter in the strong parameters section to allow it to be mass-assigned:
+
+def your_model_name_params
+  params.require(:your_model_name).permit(:name, :image)
+end
+
+6. Now, in the controller's 'create' and 'update' actions, assign the uploaded image file to the model instance:
+
+def create
+  @your_model_name = YourModelName.new(your_model_name_params)
+  @your_model_name.image.attach(params[:your_model_name][:image])
+  # ...
+end
+
+def update
+  @your_model_name = YourModelName.find(params[:id])
+  @your_model_name.update(your_model_name_params)
+  @your_model_name.image.attach(params[:your_model_name][:image])
+  # ...
+end
+
+7. To display the uploaded image in the show view, you can use the 'image_tag' helper method:
+
+<%= image_tag @your_model_name.image %>
+
+8. Execute, no terminal, o comando para instalação do active_storage:
+$ docker compose run app bin/rails active_storage:install
+
+9. Destrua os bancos. Recrie os bancos. Realize as migrações.
+
+10. Have fun!!!
+

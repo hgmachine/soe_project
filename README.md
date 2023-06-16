@@ -7,7 +7,7 @@ OBS:
 
 https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/rails/
 
-O arquivo entrypoint foi adicionado
+O arquivo entrypoint foi adicionado.
 
  
 

@@ -1,0 +1,32 @@
+<%= form_with(model: visitor, local: true) do |form| %>
+  <% if visitor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(visitor.errors.count, "error") %> prohibited this visitor from being saved:</h2>
+
+      <ul>
+      <% visitor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nickname %>
+    <%= form.text_field :nickname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hits %>
+    <%= form.number_field :hits %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
